@@ -283,12 +283,10 @@ class Index {
   renderTable3() {
     const bookmark = [];
     const bmarkName = [
-      '名称',
       '张三',
       '李四',
     ];
     const bmarkAge = [
-      '数量',
       10,
       20,
       30,
