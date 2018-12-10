@@ -50,7 +50,7 @@ class Index {
   }
 
  renderTable1() {
-   const bookmark = [
+   /*const bookmark = [
      [null, 2,    3, null, 5],
      [null, 2,    3, 4,    5],
      [1,    null, 3, null, null],
@@ -60,6 +60,12 @@ class Index {
      [null, null, 3, null, 5],
      [1,    null, 3, 4,    5],
      [null, 2,    3, null, 5],
+   ];*/
+   const bookmark = [
+     [null, null, 2],
+     [10,   null, 12],
+     [null, 12, 22],
+     [null, 31, null],
    ];
 
    const tbody = [];
@@ -90,7 +96,7 @@ class Index {
 
      if (rowSpanCount > 1) {
        // 针对每列起始数据可能为空的情况，需要交换数据，保证表格合并正确性
-       rowSpan[0] = rowSpan[elmValidIndex] + rowSpanCount - 1;
+       rowSpan[0] = (rowSpan[elmValidIndex] || 1) + rowSpanCount - 1;
        bookmark[0][colIndex] = bookmark[elmValidIndex][colIndex];
        bookmark[elmValidIndex][colIndex] = null;
        rowSpan[elmValidIndex] = 0;
@@ -104,7 +110,7 @@ class Index {
      d.forEach((k, j) => {
        if (k) {
          if (rowSpans[j][i]) {
-           tr.push(`<td rowSpan=${rowSpans[j][i]}>${k}</td>`);
+           tr.push(`<td style="padding: 10px" rowSpan='${rowSpans[j][i]}'>${k}</td>`);
          } else {
            tr.push(`<td>${k}</td>`);
          }
@@ -113,7 +119,11 @@ class Index {
      tbody.push(`<tr>${tr.join("")}</tr>`);
    });
 
-   const table = `<table><tbody>${tbody.join("")}</tbody></table>`;
+
+
+   console.log('tbody:', tbody);
+
+   const table = `<table>${tbody.join("")}</table>`;
    $('.code-GP0061234567890').replaceWith(table);
  }
 
@@ -124,6 +134,7 @@ class Index {
       [4, null, null, 4, null],
       [4, null, 4, null, null],
     ];
+
     const tbody = [];
     const colSpans = [];
 
