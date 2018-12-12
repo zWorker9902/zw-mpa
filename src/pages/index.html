@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+    charset是h5新特性，等同于
+        <meta http-reuiv="Content-Type" content="text/html; charset=UTF-8">
+    作用是会在本网页的所有http请求头中添加：
+        content-type: text/html; charset=UTF-8
+     -->
     <meta charset="UTF-8">
+    <meta name="description" content="这是一个测试应用，用于日常学习和测试数据"/>
+    <meta name="keywords" content="页面关键字"/>
+    <meta name="author" content="赵伟，1215058679@qq.com"/>
+
+    <!--设置页面不缓存-->
+    <meta http-reuiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>

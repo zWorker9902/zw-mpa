@@ -1,21 +1,21 @@
 import $ from 'jquery';
-import '../style/index.less';
+import '../style/template.less';
 
 import { throttle, debounce } from '../utils';
 import {
-  findParenNode,
   renderBookmark,
   renderTableBookMark,
   renderRowTableBookMark,
   renderColTableBookMark,
   renderMergeTableBookMark,
+  checkValidText,
 } from '../utils/template';
 
-class Index {
+class Template {
   constructor(){
     $('#root').text('Index 你好，啦啦啦');
-    this.init();
 
+    this.init();
   }
 
   init() {
@@ -56,25 +56,48 @@ class Index {
   }
 
  renderData() {
-    // 行替换，列替换
-   const bmarkName = [
+   // 普通文本书签替换
+   renderBookmark('张三', document.querySelector('.code-GPTextName'));
+   renderBookmark('25', document.querySelector('.code-GPTextAge'));
+
+    // 行展开，列展开的书签
+   const expandBkName = [
      '张三',
      '李四',
    ];
-   const bmarkAge = [
+   const expandBkAge = [
      10,
      20,
      30,
    ];
-    // 普通书签
-   const bookmark = [
+   // 行展开书签替换
+   renderRowTableBookMark(expandBkName, document.querySelector('.code-GPRowTableName1'));
+   renderRowTableBookMark(expandBkName, document.querySelector('.code-GPRowTableAge1'));
+   renderRowTableBookMark(expandBkName, document.querySelector('.code-GPRowTableName2'));
+   renderRowTableBookMark(expandBkName, document.querySelector('.code-GPRowTableAge2'));
+
+   // 列展开书签替换
+   renderColTableBookMark(expandBkName, document.querySelector('.code-GPColTableName'));
+   renderColTableBookMark(expandBkAge, document.querySelector('.code-GPColTableAge'));
+
+   // 行扩展的书签
+   const rowExpanBkName = [];
+   const rowExpanBkAge = [];
+   renderRowTableBookMark(rowExpanBkName, document.querySelector('.code-GPExpendName'));
+   renderRowTableBookMark(rowExpanBkAge, document.querySelector('.code-GPExpendAge'));
+
+    // 普通表格书签替换：列合并
+   const tableBookmark = [
      ['姓名', "年龄", '张三', '李四', '王五'],
      [null, 4, null, 4, 4],
      [4, null, null, 4, null],
      [4, null, 4, null, null],
    ];
-    // 需要合并的书签
-   const margeBookmark1 = [
+    // 普通表格书签替换
+   renderTableBookMark(tableBookmark, document.querySelector('.code-GPTable'));
+
+    // 需要行合并的书签
+   const rowMergeBookmark1 = [
      [null, 2,    3, null, 5],
      [null, 2,    3, 4,    5],
      [1,    null, 3, null, null],
@@ -85,30 +108,17 @@ class Index {
      [1,    null, 3, 4,    5],
      [null, 2,    3, null, 5],
    ];
-   const margeBookmark2 = [
+   const rowMergeBookmark2 = [
      [null, null, 2],
      [10,   null, 12],
      [null, 12, 22],
      [null, 31, null],
    ];
-
-   renderBookmark('你好', document.querySelector('.code-GP0061234567891'));
-   renderMergeTableBookMark(margeBookmark2, document.querySelector('.code-GP0061234567890'));
-
-   renderRowTableBookMark(bmarkName, document.querySelector('.code-GP0061234567801'));
-   renderRowTableBookMark(bmarkAge, document.querySelector('.code-GP0061234567802'));
-   renderRowTableBookMark(bmarkName, document.querySelector('.code-GP0061234567803'));
-   renderRowTableBookMark(bmarkAge, document.querySelector('.code-GP0061234567804'));
-
-   renderColTableBookMark(bmarkName, document.querySelector('.code-GP0061234567805'));
-   renderColTableBookMark(bmarkAge, document.querySelector('.code-GP0061234567806'));
-
-   renderBookmark('', document.querySelector('.code-GP1'));
-   renderBookmark('', document.querySelector('.code-GP2'));
+   renderMergeTableBookMark(rowMergeBookmark2, document.querySelector('.code-GPMergeRow'));
  }
 }
 
 $(() => {
-  new Index();
+  new Template();
 });
 // slice splice split
